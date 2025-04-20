@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>IY Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>IY Player</h1>
+    <div id="userInfo" style="display:none;">
+      <span id="welcomeText"></span>
+      <span id="activeCons"></span>
+      <button onclick="logout()">تسجيل الخروج</button>
+    </div>
+  </header>
+
+  <div class="container" id="loginSection">
+    <h2>تسجيل الدخول</h2>
+    <input type="text" id="serverUrl" placeholder="رابط الخادم (بدون /)">
+    <input type="text" id="username" placeholder="اسم المستخدم">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">اتصال</button>
+  </div>
+
+  <div id="appContent" style="display:none;">
+    <div class="tabs">
+      <button onclick="showSection('live')">قنوات مباشرة</button>
+      <button onclick="showSection('vod')">أفلام</button>
+      <button onclick="showSection('series')">مسلسلات</button>
+      <button onclick="showSection('favorites')">المفضلة</button>
+    </div>
+
+    <div class="searchBox">
+      <input type="text" id="searchInput" placeholder="بحث..." oninput="handleSearch()">
+    </div>
+
+    <div class="container" id="liveSection">
+      <h2>الفئات</h2>
+      <select id="categoryList" onchange="loadChannels()"></select>
+      <select id="channelList" onchange="playChannel()"></select>
+      <button onclick="addToFavorites('live')">أضف للمفضلة</button>
+      <video id="videoPlayer" controls autoplay></video>
+    </div>
+
+    <div class="container" id="vodSection" style="display:none;">
+      <h2>أفلام</h2>
+      <select id="vodCatList" onchange="loadVod()"></select>
+      <select id="vodList" onchange="playVod()"></select>
+      <button onclick="addToFavorites('vod')">أضف للمفضلة</button>
+      <video id="vodPlayer" controls></video>
+    </div>
+
+    <div class="container" id="seriesSection" style="display:none;">
+      <h2>مسلسلات</h2>
+      <select id="seriesList" onchange="loadEpisodes()"></select>
+      <select id="episodeList" onchange="playEpisode()"></select>
+      <button onclick="addToFavorites('series')">أضف للمفضلة</button>
+      <video id="seriesPlayer" controls></video>
+    </div>
+
+    <div class="container" id="favoritesSection" style="display:none;">
+      <h2>المفضلة</h2>
+      <ul id="favoritesList"></ul>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="script.js"></script>
+</body>
+</html>
